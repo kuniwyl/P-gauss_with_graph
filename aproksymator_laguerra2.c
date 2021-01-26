@@ -1,6 +1,7 @@
 #include "makespl.h"
 #include "piv_ge_solver.h"
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
@@ -68,10 +69,9 @@ make_spl(points_t * pts, spline_t * spl)
 	for (j = 0; j < baza; j++) {
 		for (i = 0; i < baza; i++)
 			for (k = 0; k < pts->n; k++)
-				add_to_entry_matrix(eqs, j, i, stop(i, x[k]) * stop(j, x[k]));
-
+				add_to_entry_matrix(eqs, j, i, (stop(i, x[k]) * stop(j, x[k])));	
 		for (k = 0; k < pts->n; k++)
-			add_to_entry_matrix(eqs, j, nb, y[k] * stop(j, x[k]));
+			add_to_entry_matrix(eqs, j, nb, (y[k] * stop(j, x[k])));
 	}
 
 

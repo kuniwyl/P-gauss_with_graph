@@ -19,7 +19,7 @@ aproksymator_na_bazie.o: makespl.h points.h gaus/piv_ge_solver.h
 aproksymator_laguerra.o: makespl.h points.h gaus/piv_ge_solver.h
 	$(CC) -I gaus -c aproksymator_laguerra.c
 
-aproksymator_laguerra2.o: makespl.h points.h gaus/piv_ge_solver.h
+aproksymator_laguerra2.o: makespl.h points.h gaus/piv_ge_solver.h 
 	$(CC) -I gaus -c aproksymator_laguerra2.c
 
 interpolator.o: makespl.h points.h gaus/piv_ge_solver.h
