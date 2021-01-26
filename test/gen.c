@@ -26,7 +26,7 @@ double exp_r( double x ) {
 }
 double fun5_r( double x ) {
                 double r= ((double)rand() - RAND_MAX/2.0)/RAND_MAX/10; // +-5%
-                return (1+r)*(1-2*x+4*x*x+2*x*x*x+5*x*x*x*x-3*x*x*x+x*x);
+                return (1+r)*(1-2*x+4*x*x+2*x*x*x-5*x*x*x*x-3*x*x*x+x*x);
 }
 double fun_r( double x ) {
                 double r= ((double)rand() - RAND_MAX/2.0)/RAND_MAX/5; // +-10%
