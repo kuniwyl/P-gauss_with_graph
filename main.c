@@ -104,6 +104,7 @@ main (int argc, char **argv)
 
     if( spl.n > 0 )
 			write_spl (&spl, ouf);
+	
 
     fclose (ouf);
   } else if (out != NULL) {  /* if point-file was NOT given, try to read splines from a file */
