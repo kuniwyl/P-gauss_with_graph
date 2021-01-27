@@ -1,11 +1,11 @@
+aprox1: main.o splines.o points.o aproksymator_laguerra1.o gaus/libge.a
+	$(CC) -o aprox1  main.o splines.o points.o aproksymator_laguerra1.o -L gaus -l ge -ggdb
+
 aprox: main.o splines.o points.o aproksymator_na_bazie.o gaus/libge.a
 	$(CC) -o aprox  main.o splines.o points.o aproksymator_na_bazie.o -L gaus -l ge
 
 aprox0: main.o splines.o points.o aproksymator_laguerra.o gaus/libge.a
 	$(CC) -o aprox  main.o splines.o points.o aproksymator_laguerra.o -L gaus -l ge -ggdb
-
-aprox1: main.o splines.o points.o aproksymator_laguerra1.o gaus/libge.a
-	$(CC) -o aprox1  main.o splines.o points.o aproksymator_laguerra1.o -L gaus -l ge -ggdb
 
 intrp: main.o splines.o points.o interpolator.o gaus/libge.a
 	$(CC) -o intrp  main.o splines.o points.o interpolator.o -L gaus -l ge
