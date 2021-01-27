@@ -1,6 +1,5 @@
 #include "makespl.h"
 #include "piv_ge_solver.h"
-#include "pochodne.h"
 
 #include <stdio.h>
 #include <stdlib.h>
