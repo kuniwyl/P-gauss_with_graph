@@ -14,6 +14,7 @@ matrix_t * make_matrix( int rn, int cn );
 matrix_t * read_matrix( FILE *in );
 
 void write_matrix( matrix_t *, FILE *out );
+void write_matrix_ekran( matrix_t * );
 
 void put_entry_matrix( matrix_t *, int i, int j, double val );
 

@@ -88,6 +88,26 @@ write_matrix (matrix_t * m, FILE * out)
   }
 }
 
+
+void
+write_matrix_ekran (matrix_t * m)
+{
+  int i, j;
+  if (m == NULL) {
+    fprintf (out, "Matrix is NULL\n");
+    return;
+  }
+
+  fprintf ("%d %d\n", m->rn, m->cn);
+  for (i = 0; i < m->rn; i++) {
+    for (j = 0; j < m->cn - 1; j++)
+      fprintf ("%8.5f ", m->e[i * m->cn + j]);
+    fprintf ("%8.5f\n", m->e[i * m->cn + j]);
+  }
+}
+
+
+
 matrix_t *
 copy_matrix (matrix_t * s)
 {
