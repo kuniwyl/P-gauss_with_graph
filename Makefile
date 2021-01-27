@@ -1,11 +1,11 @@
 aprox: main.o splines.o points.o aproksymator_na_bazie.o gaus/libge.a
 	$(CC) -o aprox  main.o splines.o points.o aproksymator_na_bazie.o -L gaus -l ge
 
-aprox1: main.o splines.o points.o aproksymator_laguerra.o gaus/libge.a
+aprox0: main.o splines.o points.o aproksymator_laguerra.o gaus/libge.a
 	$(CC) -o aprox  main.o splines.o points.o aproksymator_laguerra.o -L gaus -l ge -ggdb
 
-aprox2: main.o splines.o points.o aproksymator_laguerra2.o gaus/libge.a
-	$(CC) -o aprox  main.o splines.o points.o aproksymator_laguerra2.o -L gaus -l ge -ggdb
+aprox1: main.o splines.o points.o aproksymator_laguerra1.o gaus/libge.a
+	$(CC) -o aprox1  main.o splines.o points.o aproksymator_laguerra1.o -L gaus -l ge -ggdb
 
 intrp: main.o splines.o points.o interpolator.o gaus/libge.a
 	$(CC) -o intrp  main.o splines.o points.o interpolator.o -L gaus -l ge
@@ -19,8 +19,8 @@ aproksymator_na_bazie.o: makespl.h points.h gaus/piv_ge_solver.h
 aproksymator_laguerra.o: makespl.h points.h gaus/piv_ge_solver.h
 	$(CC) -I gaus -c aproksymator_laguerra.c
 
-aproksymator_laguerra2.o: makespl.h points.h gaus/piv_ge_solver.h 
-	$(CC) -I gaus -c aproksymator_laguerra2.c
+aproksymator_laguerra1.o: makespl.h points.h gaus/piv_ge_solver.h 
+	$(CC) -I gaus -c aproksymator_laguerra1.c
 
 interpolator.o: makespl.h points.h gaus/piv_ge_solver.h
 	$(CC) -I gaus -c interpolator.c

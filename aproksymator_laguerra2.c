@@ -71,7 +71,7 @@ make_spl(points_t * pts, spline_t * spl)
 			for (k = 0; k < pts->n; k++)
 				add_to_entry_matrix(eqs, j, i, (stop(i, x[k]) * stop(j, x[k])));	
 		for (k = 0; k < pts->n; k++)
-			add_to_entry_matrix(eqs, j, nb, (y[k] * stop(j, x[k])));
+		 add_to_entry_matrix(eqs, j, nb, (y[k] * stop(j, x[k])));
 	}
 
 

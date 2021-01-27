@@ -79,7 +79,6 @@ main (int argc, char **argv)
   /* if points-file was given, then read points, generate spline, save it to file */
   if (inp != NULL) {
     FILE *ouf = NULL; /* we shall open it later, when we shall get points */
-
     FILE *inf = fopen (inp, "r");
     if (inf == NULL) {
       fprintf (stderr, "%s: can not read points file: %s\n\n", argv[0], inp);
@@ -93,7 +92,7 @@ main (int argc, char **argv)
     }
     else
       fclose (inf);
-
+	
     ouf = fopen (out, "w");
     if (ouf == NULL) {
       fprintf (stderr, "%s: can not write spline file: %s\n\n", argv[0], out);
