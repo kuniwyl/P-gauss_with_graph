@@ -1,10 +1,12 @@
 #include "makespl.h"
 #include "piv_ge_solver.h"
-
+#include "pochodne.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <float.h>
+
+
 
 #define baza 10 
 
@@ -23,11 +25,12 @@ double stop(int n, double x)
 		        else	
 		if(n==1)return 1-x;
 		        else
-	        return ((2 * (n-1) + 1 - x) * stop(n-1, x) -((n-1) *stop(n-2, x) ) ) / n;
+	        return ((2 * n - 1 + x) * stop(n-1, x) -(n * stop(n-2, x) ) ) / n;
 }
-	
+
+
 double
-xfi(double a, double b, int n, int i, FILE *out)
+dxfi(double a, double b, int n, int i, FILE *out)
 {
 	double		h = (b - a) / (n - 1);
 	double		h3 = h * h * h;
@@ -65,15 +68,15 @@ make_spl(points_t * pts, spline_t * spl)
 	
 	eqs = make_matrix(nb, nb + 1);
 
-
-	for (j = 0; j < baza; j++) {
-		for (i = 0; i < baza; i++)
+	for (j = 0; j < nb; j++) {
+		for (i = 0; i < nb; i++)
 			for (k = 0; k < pts->n; k++)
-				add_to_entry_matrix(eqs, j, i, (stop(i, x[k]) * stop(j, x[k])));	
+			{
+				add_to_entry_matrix(eqs, j, i, stop(i, x[k]) * stop(j, x[k]));	
+			}
 		for (k = 0; k < pts->n; k++)
-		 add_to_entry_matrix(eqs, j, nb, (y[k] * stop(j, x[k])));
+			add_to_entry_matrix(eqs, j, nb, y[k] * stop(j, x[k]));
 	}
-
 
 	if (piv_ge_solver(eqs)) {
 		spl->n = 0;
@@ -90,8 +93,8 @@ make_spl(points_t * pts, spline_t * spl)
 			spl->f3[i] = 0;
 			for (k = 0; k < baza; k++) {
 				double		ck = get_entry_matrix(eqs, k, nb);
-				spl->f[i]  += ck * stop  (k, xx);
-				spl->f1[i] += ck * stop (k, xx);
+				spl->f[i]  += ck * stop(k, xx);
+				spl->f1[i] += ck * stop(k, xx);
 				spl->f2[i] += ck * stop(k, xx);
 				spl->f3[i] += ck * stop(k, xx);
 			}
