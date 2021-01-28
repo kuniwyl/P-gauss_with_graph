@@ -20,11 +20,9 @@
 
 double stop(int n, int y , double x)
 {
-		if(n==0)return 1;
-		        else	
-		if(n==1)return 1 + y - x;
-		        else
-	        return ((((2 * (n-1) + 1 + y - x) * stop(n-1, y, x) -((n-1) + y) * stop(n-2, y , x) ) ) / n);
+		if(n==0)return 1;	
+		if(n==1)return 1 + (double)y - x;
+	        return ((((2.0 * n - 1 + y - x) * stop(n-1, y, x) -((n-1) + y) * stop(n-2, y , x) ) ) / n);
 }
 
 
@@ -36,29 +34,8 @@ double di(int n, double x, int k, int y)
 	return 0;
 }
 
-double
-dxfi(double a, double b, int n, int i, FILE *out)
-{
-	double		h = (b - a) / (n - 1);
-	double		h3 = h * h * h;
-	int		hi         [5] = {i - 2, i - 1, i, i + 1, i + 2};
-	double		hx      [5];
-	int		j;
-
-	for (j = 0; j < 5; j++)
-		hx[j] = a + h * hi[j];
-
-	fprintf( out, "# nb=%d, i=%d: hi=[", n, i );
-	for( j= 0; j < 5; j++ )
-		fprintf( out, " %d", hi[j] );
-	fprintf( out, "] hx=[" );
-	for( j= 0; j < 5; j++ )
-		fprintf( out, " %g", hx[j] );
-	fprintf( out, "]\n" );
-}
-
 void
-make_spl(points_t * pts, spline_t * spl)
+make_spl(points_t * pts, spline_t * spl, int level)
 {
 
 	matrix_t       *eqs= NULL;
@@ -67,11 +44,7 @@ make_spl(points_t * pts, spline_t * spl)
 	double		a = x[0];
 	double		b = x[pts->n - 1];
 	int		i, j, k;
-	int		nb = pts->n - 3 > 10 ? 10 : pts->n - 3;
-  char *nbEnv= getenv( "APPROX_BASE_SIZE" );
-
-	if( nbEnv != NULL && atoi( nbEnv ) > 0 )
-		nb = atoi( nbEnv );
+	int 		nb = level;
 	
 	eqs = make_matrix(nb, nb + 1);
 
@@ -98,7 +71,7 @@ make_spl(points_t * pts, spline_t * spl)
 			spl->f1[i] = 0;
 			spl->f2[i] = 0;
 			spl->f3[i] = 0;
-			for (k = 0; k < baza; k++) {
+			for (k = 0; k < nb; k++) {
 				double		ck = get_entry_matrix(eqs, k, nb);
 				spl->f[i]  += ck * stop(k, 0, xx);
 				spl->f1[i] += ck * di(k, xx, 1, 0);
