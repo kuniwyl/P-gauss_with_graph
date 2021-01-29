@@ -88,6 +88,7 @@ write_matrix (matrix_t * m, FILE * out)
   }
 }
 
+
 matrix_t *
 copy_matrix (matrix_t * s)
 {

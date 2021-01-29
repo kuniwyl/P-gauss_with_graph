@@ -33,7 +33,9 @@ main (int argc, char **argv)
   double fromX = 0;
   double toX = 0;
   int n = 100;
-	char *progname= argv[0];
+  char *progname= argv[0];
+  int level =10;
+
 
   points_t pts;
   spline_t spl;
@@ -42,7 +44,7 @@ main (int argc, char **argv)
   spl.n = 0;
 
   /* process options, save user choices */
-  while ((opt = getopt (argc, argv, "p:s:g:f:t:n:")) != -1) {
+  while ((opt = getopt (argc, argv, "p:s:g:f:t:n:b:")) != -1) {
     switch (opt) {
     case 'p':
       inp = optarg;
@@ -62,6 +64,9 @@ main (int argc, char **argv)
     case 'n':
       n = atoi (optarg);
       break;
+    case 'b':
+      level = atoi (optarg);
+      break;
     default:                   /* '?' */
       fprintf (stderr, usage, progname);
       exit (EXIT_FAILURE);
@@ -79,7 +84,6 @@ main (int argc, char **argv)
   /* if points-file was given, then read points, generate spline, save it to file */
   if (inp != NULL) {
     FILE *ouf = NULL; /* we shall open it later, when we shall get points */
-
     FILE *inf = fopen (inp, "r");
     if (inf == NULL) {
       fprintf (stderr, "%s: can not read points file: %s\n\n", argv[0], inp);
@@ -93,17 +97,18 @@ main (int argc, char **argv)
     }
     else
       fclose (inf);
-
+	
     ouf = fopen (out, "w");
     if (ouf == NULL) {
       fprintf (stderr, "%s: can not write spline file: %s\n\n", argv[0], out);
       exit (EXIT_FAILURE);
     }
 
-    make_spl (&pts, &spl);
+    make_spl (&pts, &spl, level);
 
     if( spl.n > 0 )
 			write_spl (&spl, ouf);
+	
 
     fclose (ouf);
   } else if (out != NULL) {  /* if point-file was NOT given, try to read splines from a file */

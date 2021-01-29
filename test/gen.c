@@ -5,8 +5,13 @@
 #include <string.h>
 
 double fun( double x ) {
+<<<<<<< HEAD
+				double r= ((double)rand() - RAND_MAX/2.0)/RAND_MAX/5; // +-10%
+				return (1+r)*(x*x);
+=======
                 double r= ((double)rand() - RAND_MAX/2.0)/RAND_MAX/5; // +-10%
                 return (1+r)*(10*x*x*x*x+5*x*x*x+x*x);
+>>>>>>> 5299d20fb4f559f0ff1e3332a471cc557bede508
 }
 double sin_r( double x ) {
                 double r= ((double)rand() - RAND_MAX/2.0)/RAND_MAX/5; // +-10%
